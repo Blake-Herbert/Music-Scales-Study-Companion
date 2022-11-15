@@ -12,27 +12,33 @@ MainMenu();
 void MainMenu()
 {
     Title = "Scale Practice Companion";
+
+
+                                   // New menus display prompts and allow selection of options using arrow keys + enter
+
     string mainMenuPrompt = @"Welcome to the Scale Practice Companion
 Use Arrow Keys to cycle through menus!
 ------------------------";
     string[] mainMenuOptions = { "Timed Exercise", "Show Me the Scales", "Exit" };
-
     Menu mainMenu = new Menu(mainMenuPrompt, mainMenuOptions);
     mainMenu.DisplayOptions();
     int selectedMainMenuOption = mainMenu.Run();
+    
 
+
+                                    // This switch statement determines what the selected Main Menu option does
     switch (selectedMainMenuOption)
     {
         case 0:
-            TimedExercise();
+            TimedExercise();        // Timed exercise displays random scales periodically
             break;
         case 1:
-            ShowMeScales();
+            ShowMeScales();         // Show Me Scales displays requested scales by choosing a starting note and mode
             break;
-        case 2:
-            Clear();
+        case 2:                     // This option terminates the program
+            Clear(); 
             WriteLine("Press any key to exit");
-            ReadKey();
+            ReadKey();  
             Environment.Exit(0);
             break;
         default:
@@ -48,25 +54,26 @@ Use Arrow Keys to cycle through menus!
 void TimedExercise()
 {
     Clear();
+
+                                         // Start Challenge Menu gives the user a moment to prepare before the timer starts or to return to the main menu
     string Prompt = @"You will be given several scales constructed at random.
 See how many melodies you can come up with before the timer runs out! Are you ready to begin?
 ----------------------------------";
     string[] Options = { "Begin", "Return to main menu" };
 
-
     Menu startChallengeMenu = new Menu(Prompt, Options);
     startChallengeMenu.DisplayOptions();
 
-    if (startChallengeMenu.Run() == 1)
+    if (startChallengeMenu.Run() == 1)   // This option returns to the main menu
         MainMenu();
     else
-        Clear();
+        Clear();                         // This continues on to the timed practice exercise
 
     TimedPractice practiceSession = new TimedPractice();
     practiceSession.randomScales();
 
 
-    ReadKey();
+    ReadKey();                           // Return to main menu when the practice is finished
     MainMenu();
 }
 
@@ -74,27 +81,14 @@ See how many melodies you can come up with before the timer runs out! Are you re
 
 
 
-void ShowMeScales()
-{
+void ShowMeScales()                      // Show Me Scales method handles selection of starting note and mode
+{                                        // Show Me Scales then refers to the Scales class to produce the scale with chosen options
+
     Scales.ScaleConstructor(StartingNoteMenu(), ModeMenu());
     MainMenu();
 
 
-    int ModeMenu()
-    {
-        string modeSelectionPrompt = @"Which mode would you like?
-----------------------------------";
-        string[] modeSelectionOptions = { "Ionian/Major", "Dorian", "Phrygian", "Lydian", "Mixolydian", "Aeolian/Minor", "Locrian" };
-
-
-        Menu modesMenu = new Menu(modeSelectionPrompt, modeSelectionOptions);
-        modesMenu.DisplayOptions();
-        int selectedMode = modesMenu.Run();
-
-        return selectedMode;
-    }
-
-    int StartingNoteMenu()
+    int StartingNoteMenu()               // Starting Note Menu displays all possible starting notes and returns the user's selection
     {
         string startingNotePrompt = @"Select the starting note for your scale
 ----------------------------------";
@@ -106,6 +100,22 @@ void ShowMeScales()
         int selectedStartingNote = startingNoteMenu.Run();
 
         return selectedStartingNote;
+    }
+
+
+
+    int ModeMenu()                       // Mode menu displays all available modes and returns the user's selection
+    {
+        string modeSelectionPrompt = @"Which mode would you like?
+----------------------------------";
+        string[] modeSelectionOptions = { "Ionian/Major", "Dorian", "Phrygian", "Lydian", "Mixolydian", "Aeolian/Minor", "Locrian" };
+
+
+        Menu modesMenu = new Menu(modeSelectionPrompt, modeSelectionOptions);
+        modesMenu.DisplayOptions();
+        int selectedMode = modesMenu.Run();
+
+        return selectedMode;
     }
 }
 

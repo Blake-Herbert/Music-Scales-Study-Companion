@@ -9,25 +9,25 @@ namespace Music_Scales
 {
     public class Menu
     {
-        private int SelectedIndex;
-        private string[] Options;
+        private int SelectedIndex;                          // Selected Index will be the current option
+        private string[] Options;                           
         private string Prompt;
 
         public Menu(string prompt, string[] options)
         {
             Prompt = prompt;
             Options = options;
-            SelectedIndex = 0;
+            SelectedIndex = 0;                              // Selected Index starts at the top of the options
         }
 
-        public void DisplayOptions()
+        public void DisplayOptions()                        // Display Options shows menu prompt and lists menu options, highlighting current option
         {
             WriteLine(Prompt);
-            for (int i = 0; i < Options.Length; i++)
+            for (int i = 0; i < Options.Length; i++)        
             {
-                string currentOption = Options[i];
+                string currentOption = Options[i];          // Current Option is the selected index
 
-                if (i == SelectedIndex)
+                if (i == SelectedIndex)                     // This if/else statement sets the color of current option and default color for remaining options
                 {
                     ForegroundColor = ConsoleColor.Black;
                     BackgroundColor = ConsoleColor.White;
@@ -38,14 +38,17 @@ namespace Music_Scales
                     BackgroundColor = ConsoleColor.Black;
                 }
 
-                WriteLine($"{currentOption}");
+                WriteLine($"{currentOption}");              // Writes menu options
             }
             ResetColor();
         }
-        public int Run()
+
+
+
+        public int Run()                                 // Run method calls Display Options method and allows arrow keys to flip through menu option before option selection
         {
             ConsoleKey keyPressed;
-            do
+            do                                           // This do/while loop keeps options displayed until enter key is pressed, which will select the current highlighted option
             {
                 Clear();
                 DisplayOptions();
@@ -53,18 +56,18 @@ namespace Music_Scales
                 ConsoleKeyInfo keyInfo = ReadKey(true);
                 keyPressed = keyInfo.Key;
 
-                if (keyPressed == ConsoleKey.UpArrow)
+                if (keyPressed == ConsoleKey.UpArrow)    // If the up arrow is pressed, move highlight to the option above the current option
                 {
                     SelectedIndex--;
-                    if (SelectedIndex == -1)
+                    if (SelectedIndex == -1)             // If the current option is at the top of the list and up arrow is pressed, move highlight to bottom of menu
                     {
                         SelectedIndex = Options.Length - 1;
                     }
                 }
-                if (keyPressed == ConsoleKey.DownArrow)
+                if (keyPressed == ConsoleKey.DownArrow)  // If the down arrow is pressed, move highlight to the option below the current option
                 {
                     SelectedIndex++;
-                    if (SelectedIndex == Options.Length)
+                    if (SelectedIndex == Options.Length) // If the current option is at the bottom of the list and down arrow is pressed, move highlight to top of the menu
                     {
                         SelectedIndex = 0;
                     }
@@ -72,7 +75,7 @@ namespace Music_Scales
 
             } while (keyPressed != ConsoleKey.Enter);
 
-            return SelectedIndex;
+            return SelectedIndex;                        // Returns int value of selected option
         }
     }
 }
