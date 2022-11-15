@@ -17,8 +17,7 @@ void MainMenu()
                                    // New menus display prompts and allow selection of options using arrow keys + enter
 
     string mainMenuPrompt = @"Welcome to the Scale Practice Companion
-Use Arrow Keys to cycle through menus!
-------------------------";
+Use Arrow Keys to cycle through menus!";
     string[] mainMenuOptions = { "Timed Exercise", "Show Me the Scales", "Exit" };
     Menu mainMenu = new Menu(mainMenuPrompt, mainMenuOptions);
     mainMenu.DisplayOptions();
@@ -55,10 +54,9 @@ void TimedExercise()
 {
     Clear();
 
-                                         // Start Challenge Menu gives the user a moment to prepare before the timer starts or to return to the main menu
+    // Start Challenge Menu gives the user a moment to prepare before the timer starts or to return to the main menu
     string Prompt = @"You will be given several scales constructed at random.
-See how many melodies you can come up with before the timer runs out! Are you ready to begin?
-----------------------------------";
+See how many melodies you can come up with before the timer runs out! Are you ready to begin?";
     string[] Options = { "Begin", "Return to main menu" };
 
     Menu startChallengeMenu = new Menu(Prompt, Options);
@@ -69,8 +67,20 @@ See how many melodies you can come up with before the timer runs out! Are you re
     else
         Clear();                         // This continues on to the timed practice exercise
 
-    TimedPractice practiceSession = new TimedPractice();
-    practiceSession.randomScales();
+
+    DateTime now = new DateTime();
+    now = DateTime.Now;
+    string timePrompt = "The time is " + now + "\nHow long would you like to practice?";
+    string[] timeOptions = { @"One Minute, you will finish at " + now.AddMinutes(1) , "Return" };
+    Menu timeMenu = new Menu(timePrompt, timeOptions);
+
+    timeMenu.DisplayOptions();
+
+
+
+
+    //TimedPractice practiceSession = new TimedPractice();
+    //practiceSession.randomScales();
 
 
     ReadKey();                           // Return to main menu when the practice is finished
@@ -90,8 +100,7 @@ void ShowMeScales()                      // Show Me Scales method handles select
 
     int StartingNoteMenu()               // Starting Note Menu displays all possible starting notes and returns the user's selection
     {
-        string startingNotePrompt = @"Select the starting note for your scale
-----------------------------------";
+        string startingNotePrompt = @"Select the starting note for your scale";
         string[] startingNoteMenuOptions = { "C ", "C#/Db ", "D ", "Eb/D# ", "E ", "F ", "F#/Gb ", "G ", "G#/Ab ", "A ", "Bb/A# ", "B " };
 
 
@@ -106,8 +115,7 @@ void ShowMeScales()                      // Show Me Scales method handles select
 
     int ModeMenu()                       // Mode menu displays all available modes and returns the user's selection
     {
-        string modeSelectionPrompt = @"Which mode would you like?
-----------------------------------";
+        string modeSelectionPrompt = @"Which mode would you like?";
         string[] modeSelectionOptions = { "Ionian/Major", "Dorian", "Phrygian", "Lydian", "Mixolydian", "Aeolian/Minor", "Locrian" };
 
 

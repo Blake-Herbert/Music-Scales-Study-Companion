@@ -15,7 +15,7 @@ namespace Music_Scales
 
         public Menu(string prompt, string[] options)
         {
-            Prompt = prompt;
+            Prompt = prompt + "\n----------------------------------\n";
             Options = options;
             SelectedIndex = 0;                              // Selected Index starts at the top of the options
         }

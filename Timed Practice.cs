@@ -7,8 +7,11 @@ using static System.Console;
 
 namespace Music_Scales
 {
-    public class TimedPractice : Scales
+     class TimedPractice : Scales
     {
+
+        
+
 
         
         public void randomScales()

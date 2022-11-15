@@ -30,7 +30,7 @@ namespace Music_Scales
         public static void ScaleConstructor(int selectedStartingNote, int selectedMode) 
         {
             Clear();
-                                // Using Mode enum to display the selected mode
+                                // Displaying full name of the scale using selected starting note and the Mode enum to display the selected mode
             Mode mode = (Mode)selectedMode;     
             WriteLine(allDiatonicNotes[selectedStartingNote] + " " + mode + @" Scale:
 ----------------------------------");
