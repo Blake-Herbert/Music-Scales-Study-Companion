@@ -36,7 +36,7 @@ namespace Music_Scales
                                 // Scale Constructor received the chosen starting note and mode from the Show Me Scales method
         public static void ScaleConstructor(int selectedStartingNote, int selectedMode) 
         {
-            Clear();
+            
                                 // Displaying full name of the scale using selected starting note and the Mode enum to display the selected mode
             Mode mode = (Mode)selectedMode;     
 

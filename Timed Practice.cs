@@ -18,7 +18,7 @@ namespace Music_Scales
         
         public static void randomScales()
         {
-            Clear();
+            
             Random random = new Random();       
 
             int randomStartingNote = random.Next(0, 12);        // Random starting note value doesn't exceed a single octave's worth of notes
@@ -67,7 +67,7 @@ namespace Music_Scales
             {
                 newRandomScaleTimer.Stop();
                 newRandomScaleTimer.Dispose();
-                Clear();
+                WriteLine("\n \n");
                 randomScales();
                 SetTimer2();
             }
@@ -85,7 +85,7 @@ namespace Music_Scales
             {
                 newRandomScaleTimer.Stop();
                 newRandomScaleTimer.Dispose();
-                Clear();
+                WriteLine("\n \n");
                 randomScales();
                 SetTimer3();
             }
@@ -102,7 +102,7 @@ namespace Music_Scales
             {
                 newRandomScaleTimer.Stop();
                 newRandomScaleTimer.Dispose();
-                Clear();
+                WriteLine("\n \n");
                 randomScales();
                 SetTimer4();
             }
@@ -122,7 +122,7 @@ namespace Music_Scales
                     Clear();
 
 
-                    WriteLine("End of exercise. Press enter twice to return to main menu.");
+                    WriteLine("End of exercise. Press any key to return to main menu.");
 
 
                 }

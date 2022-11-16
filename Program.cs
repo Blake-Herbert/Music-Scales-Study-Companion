@@ -19,7 +19,7 @@ void MainMenu()
 
     string mainMenuPrompt = @"Welcome to the Scale Practice Companion
 Use Arrow Keys to cycle through menus!";
-    string[] mainMenuOptions = { "Timed Exercise", "Show Me the Scales", "Exit" };
+    string[] mainMenuOptions = { "Show Me the Scales", "Timed Exercise", "Exit" };
     Menu mainMenu = new Menu(mainMenuPrompt, mainMenuOptions);
     mainMenu.DisplayOptions();
     int selectedMainMenuOption = mainMenu.Run();
@@ -30,11 +30,10 @@ Use Arrow Keys to cycle through menus!";
     switch (selectedMainMenuOption)
     {
         case 0:
-            TimedExercise();        // Timed exercise displays random scales periodically
+            ShowMeScales();         // Show Me Scales displays requested scales by choosing a starting note and mode
             break;
         case 1:
-            ShowMeScales();         // Show Me Scales displays requested scales by choosing a starting note and mode
-
+            TimedExercise();        // Timed exercise displays random scales periodically            
             break;
         case 2:                     // This option terminates the program
             Clear(); 
@@ -50,58 +49,9 @@ Use Arrow Keys to cycle through menus!";
 
 
 
-
-
-void TimedExercise()
-{
-    Clear();
-
-                                    // Time Menu gives the user the current time and how long their practice will last
-   DateTime now = new DateTime();
-    now = DateTime.Now;
-    string timePrompt = "The time is " + now + "\nHow long would you like to practice?";
-    string[] timeOptions = { @"One Minute, you will finish at " + now.AddMinutes(1), "Thirty seconds, you will finish at " + now.AddSeconds(30), "Return" };
-    Menu timeMenu = new Menu(timePrompt, timeOptions);
-    timeMenu.DisplayOptions();
-    switch(timeMenu.Run())
-    {
-        case 0:
-            TimedPractice.Timer.RunOneMinute();
-            break;
-
-        case 1:
-            TimedPractice.Timer.Run30Seconds();
-            break;
-        case 2:
-            MainMenu();
-            break;
-    }
-
-
-
-
-    //TimedPractice practiceSession = new TimedPractice();
-    //practiceSession.randomScales();
-
-
-    ReadKey();                           // Return to main menu when the practice is finished
-    MainMenu();
-}
-
-
-
-
-
-
-
-
-
-
-
-
 void ShowMeScales()                      // Show Me Scales method handles selection of starting note and mode
 {                                        // Show Me Scales then refers to the Scales class to produce the scale with chosen options
-
+    Clear();
     Scales.ScaleConstructor(StartingNoteMenu(), ModeMenu());
     ReadKey();
     MainMenu();
@@ -131,10 +81,53 @@ void ShowMeScales()                      // Show Me Scales method handles select
         Menu modesMenu = new Menu(modeSelectionPrompt, modeSelectionOptions);
         modesMenu.DisplayOptions();
         int selectedMode = modesMenu.Run();
+        Clear();
 
         return selectedMode;
     }
 }
+
+
+
+void TimedExercise()
+{
+    Clear();
+
+                                    // Time Menu gives the user the current time and how long their practice will last
+   DateTime now = new DateTime();
+    now = DateTime.Now;
+    string timePrompt = "The time is " + now + "\nHow long would you like to practice?";
+    string[] timeOptions = { @"One Minute, you will finish at " + now.AddMinutes(1), "Thirty seconds, you will finish at " + now.AddSeconds(30), "Return" };
+    Menu timeMenu = new Menu(timePrompt, timeOptions);
+    timeMenu.DisplayOptions();
+    switch(timeMenu.Run())
+    {
+        case 0:
+            TimedPractice.Timer.RunOneMinute();
+            break;
+
+        case 1:
+            TimedPractice.Timer.Run30Seconds();
+            break;
+        case 2:
+            MainMenu();
+            break;
+    }
+
+    ReadKey();                           // Return to main menu when the practice is finished
+    MainMenu();
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
