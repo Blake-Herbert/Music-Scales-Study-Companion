@@ -1,6 +1,7 @@
 ﻿using System.Net.Sockets;
 using System.Reflection;
 using System.Reflection.Metadata.Ecma335;
+using System.Timers;
 using Music_Scales;
 using static System.Console;
 
@@ -33,6 +34,7 @@ Use Arrow Keys to cycle through menus!";
             break;
         case 1:
             ShowMeScales();         // Show Me Scales displays requested scales by choosing a starting note and mode
+
             break;
         case 2:                     // This option terminates the program
             Clear(); 
@@ -54,27 +56,26 @@ void TimedExercise()
 {
     Clear();
 
-    // Start Challenge Menu gives the user a moment to prepare before the timer starts or to return to the main menu
-    string Prompt = @"You will be given several scales constructed at random.
-See how many melodies you can come up with before the timer runs out! Are you ready to begin?";
-    string[] Options = { "Begin", "Return to main menu" };
-
-    Menu startChallengeMenu = new Menu(Prompt, Options);
-    startChallengeMenu.DisplayOptions();
-
-    if (startChallengeMenu.Run() == 1)   // This option returns to the main menu
-        MainMenu();
-    else
-        Clear();                         // This continues on to the timed practice exercise
-
-
-    DateTime now = new DateTime();
+                                    // Time Menu gives the user the current time and how long their practice will last
+   DateTime now = new DateTime();
     now = DateTime.Now;
     string timePrompt = "The time is " + now + "\nHow long would you like to practice?";
-    string[] timeOptions = { @"One Minute, you will finish at " + now.AddMinutes(1) , "Return" };
+    string[] timeOptions = { @"One Minute, you will finish at " + now.AddMinutes(1), "Thirty seconds, you will finish at " + now.AddSeconds(30), "Return" };
     Menu timeMenu = new Menu(timePrompt, timeOptions);
-
     timeMenu.DisplayOptions();
+    switch(timeMenu.Run())
+    {
+        case 0:
+            TimedPractice.Timer.RunOneMinute();
+            break;
+
+        case 1:
+            TimedPractice.Timer.Run30Seconds();
+            break;
+        case 2:
+            MainMenu();
+            break;
+    }
 
 
 
@@ -91,10 +92,18 @@ See how many melodies you can come up with before the timer runs out! Are you re
 
 
 
+
+
+
+
+
+
+
 void ShowMeScales()                      // Show Me Scales method handles selection of starting note and mode
 {                                        // Show Me Scales then refers to the Scales class to produce the scale with chosen options
 
     Scales.ScaleConstructor(StartingNoteMenu(), ModeMenu());
+    ReadKey();
     MainMenu();
 
 
@@ -126,6 +135,15 @@ void ShowMeScales()                      // Show Me Scales method handles select
         return selectedMode;
     }
 }
+
+
+
+
+
+
+
+
+
 
 
 

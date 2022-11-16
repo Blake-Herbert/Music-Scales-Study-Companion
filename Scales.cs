@@ -26,14 +26,21 @@ namespace Music_Scales
             Locrian
         }
 
+        //public string scaleName
+        //{
+        //    get { return scaleName; }
+        //    set { scaleName = value;  }
+        //}
+
+
                                 // Scale Constructor received the chosen starting note and mode from the Show Me Scales method
         public static void ScaleConstructor(int selectedStartingNote, int selectedMode) 
         {
             Clear();
                                 // Displaying full name of the scale using selected starting note and the Mode enum to display the selected mode
             Mode mode = (Mode)selectedMode;     
-            WriteLine(allDiatonicNotes[selectedStartingNote] + " " + mode + @" Scale:
-----------------------------------");
+
+            WriteLine(allDiatonicNotes[selectedStartingNote] + " " + mode + " Scale:" + "\n----------------------------");
 
                                 // Intervals are the "shape" of modes, these arrays store those shapes
             int[] ionianScaleIntervals = { 0, 2, 4, 5, 7, 9, 11, 12 };
@@ -60,8 +67,7 @@ namespace Music_Scales
                 
                 Write("(" + allDiatonicNotes[selectedStartingNote + interval] + ") ");
             }
-
-            ReadKey();
+            
 
         }
     }
