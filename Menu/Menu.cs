@@ -5,29 +5,29 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Console;
 
-namespace Music_Scales
+namespace Music_Scales_Study_Companion.Menu
 {
     public class Menu
     {
-        private int SelectedIndex;                          
-        private string[] Options;                           
+        private int SelectedIndex;
+        private string[] Options;
         private string Prompt;
 
         public Menu(string prompt, string[] options)
         {
             Prompt = prompt + "\n----------------------------------\n";
             Options = options;
-            SelectedIndex = 0;                              
+            SelectedIndex = 0;
         }
 
-        public void DisplayOptions()                       
+        public void DisplayOptions()
         {
             WriteLine(Prompt);
-            for (int i = 0; i < Options.Length; i++)        
+            for (int i = 0; i < Options.Length; i++)
             {
-                string currentOption = Options[i];          
+                string currentOption = Options[i];
 
-                if (i == SelectedIndex)                     
+                if (i == SelectedIndex)
                 {
                     ForegroundColor = ConsoleColor.Black;
                     BackgroundColor = ConsoleColor.White;
@@ -38,17 +38,17 @@ namespace Music_Scales
                     BackgroundColor = ConsoleColor.Black;
                 }
 
-                WriteLine($"{currentOption}");              
+                WriteLine($"{currentOption}");
             }
             ResetColor();
         }
 
 
 
-        public int Run()                                 
+        public int Run()
         {
             ConsoleKey keyPressed;
-            do                                           
+            do
             {
                 Clear();
                 DisplayOptions();
@@ -56,18 +56,18 @@ namespace Music_Scales
                 ConsoleKeyInfo keyInfo = ReadKey(true);
                 keyPressed = keyInfo.Key;
 
-                if (keyPressed == ConsoleKey.UpArrow)    
+                if (keyPressed == ConsoleKey.UpArrow)
                 {
                     SelectedIndex--;
-                    if (SelectedIndex == -1)             
+                    if (SelectedIndex == -1)
                     {
                         SelectedIndex = Options.Length - 1;
                     }
                 }
-                if (keyPressed == ConsoleKey.DownArrow)  
+                if (keyPressed == ConsoleKey.DownArrow)
                 {
                     SelectedIndex++;
-                    if (SelectedIndex == Options.Length) 
+                    if (SelectedIndex == Options.Length)
                     {
                         SelectedIndex = 0;
                     }
@@ -75,7 +75,7 @@ namespace Music_Scales
 
             } while (keyPressed != ConsoleKey.Enter);
 
-            return SelectedIndex;                       
+            return SelectedIndex;
         }
     }
 }
